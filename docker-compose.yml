@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./server:/build
+    env_file:
+      - ./server/.env
+    ports:
+      - "8801:8801"
+      - "8802:8802"
+    #command: gin -p 8802 -a 8801 -i -d cmd/server/ run main.go
+    command: gin -p 8802 -a 8801 -i run main.go
+    
+  redis:
+    image: "redis:alpine"
+
+    command: redis-server
+
+    ports:
+     - "6379:6379"

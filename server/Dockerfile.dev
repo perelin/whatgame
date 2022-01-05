@@ -1,0 +1,23 @@
+FROM golang:1.16-alpine
+
+## adding general build stuff -> seems to be neede to run `go test` a container
+
+RUN apk update  \
+    && apk add --virtual build-dependencies  \
+    build-base  \
+    gcc  \
+    git  \
+    curl \
+    wget  \
+    && rm -rf /var/cache/apk/*
+
+## app
+
+USER root
+RUN mkdir /build 
+ADD ./ /build/
+WORKDIR /build 
+
+RUN go get github.com/codegangsta/gin
+
+WORKDIR /build 
