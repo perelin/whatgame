@@ -1,7 +1,6 @@
 # https://devcenter.heroku.com/articles/build-docker-images-heroku-yml
 build:
-    docker:
-        web: ./server/Dockerfile
-    addons:
+  docker:
+    web: ./server/Dockerfile
+  addons:
     - plan: heroku-redis
-        as: DATABASE
