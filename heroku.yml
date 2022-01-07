@@ -2,5 +2,5 @@
 build:
   docker:
     web: ./server/Dockerfile
-  addons:
-    - plan: heroku-redis
+addons:
+  - plan: heroku-redis
