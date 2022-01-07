@@ -1,10 +1,17 @@
-Twitch
+# README
+
+## Heroku
+
+deployment over github main branch
+heroku logs -a p2-whatgame-server -t
+
+## Twitch
 
 https://dev.twitch.tv/console/apps/ofpcxa76vok6ldo3x22kw8yv7cti70
 secret h6ydteyhysmenr0ab97yx55ez7j3cp
 clientid ofpcxa76vok6ldo3x22kw8yv7cti70
 
-Reddit
+## Reddit
 
 https://www.reddit.com/r/XboxGamePass/comments/jt214y/public_api_for_fetching_the_list_of_game_pass/
 Here's what the site uses:
