@@ -9,15 +9,16 @@ services:
     env_file:
       - ./server/.env
     ports:
-      - "8801:8801"
-      - "8802:8802"
+      - "9000:9000"
+
+    # gin port settings seem to overwrite the .env ports
+    # -p is the external facing port htat needs to be exposed by docker
+    # -a is the internal application port inside the container
     #command: gin -p 8802 -a 8801 -i -d cmd/server/ run main.go
-    command: gin -p 8802 -a 8801 -i run main.go
+    command: gin -p 9000 -a 8808 -i run main.go
     
   redis:
     image: "redis:alpine"
-
     command: redis-server
-
     ports:
      - "6379:6379"

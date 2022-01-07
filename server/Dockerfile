@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine as builder
 
 ## adding general build stuff -> seems to be neede to run `go test` a container
 
@@ -17,8 +17,14 @@ USER root
 RUN mkdir /build 
 ADD ./ /build/
 WORKDIR /build 
+RUN go build -v -o server
 
-RUN go get github.com/codegangsta/gin
+### 
+## production image 
+### 
 
-WORKDIR /build 
+FROM alpine
 
+USER appuser
+COPY --from=builder /build/server  /app/server
+CMD ["/app/server"]

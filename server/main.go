@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 
 	"whatgameserver/internal/microsoftgp"
@@ -15,11 +16,11 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-var idgbClientID string = "ofpcxa76vok6ldo3x22kw8yv7cti70"
-var idgbAccessToken string = "vk3dhw0xaxrc3bld1io8moc94h291d"
-var redisURI string = "redis:6379"
-var ctx = context.Background()
+var idgbClientID string
+var idgbAccessToken string
+var redisURI string
 var rdb *redis.Client
+var ctx = context.Background()
 
 type Game struct {
 	Name    string  `json:"name"`
@@ -30,14 +31,38 @@ type Game struct {
 	GPID    string  `json:"gpid"`
 }
 
+func CORSMiddleware() gin.HandlerFunc {
+	//  https://stackoverflow.com/questions/29418478/go-gin-framework-cors
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
+}
+
 func init() {
+	idgbClientID = os.Getenv("IGDB_CLIENT_ID")
+	idgbAccessToken = os.Getenv("IGDB_ACCESS_TOKEN")
+	redisURI = os.Getenv("REDIS_URL")
 	rdb = redis.NewClient(&redis.Options{
 		Addr: redisURI,
 	})
 }
 
 func main() {
+
+	log.Println("Port!", getPort())
+
 	r := gin.Default()
+	r.Use(CORSMiddleware())
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "po2ng",
@@ -111,7 +136,7 @@ func main() {
 			})
 			return
 		}
-		c.String(200, gamesJSON)
+		c.String(200, "%s", gamesJSON)
 	})
 
 	r.PUT("/games/cache", func(c *gin.Context) {
@@ -282,4 +307,13 @@ func getMSGPGamesDetails(gameIDs []string) ([]microsoftgp.GamepassGameDetails, e
 		return []microsoftgp.GamepassGameDetails{}, err
 	}
 	return gamepassResponseGamesDetails.Products, nil
+}
+
+func getPort() string {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must bse set2")
+	}
+	return port
 }

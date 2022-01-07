@@ -1,10 +1,42 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    />
+    <div class="q-pa-md">
+      <q-table
+        title="Games"
+        :rows="gamesRows"
+        :columns="gamesColumns"
+        row-key="id"
+        :pagination="initialPagination"
+        :filter="filter"
+      >
+        <template #body-cell-link="props">
+          <q-td class="bg-blue-1" :props="props">
+            <q-btn
+              v-if="props.value != ''"
+              color="white"
+              text-color="black"
+              label="link"
+              :href="props.value"
+              target="_blank"
+            />
+          </q-td>
+        </template>
+
+        <template v-slot:top-right>
+          <q-input
+            borderless
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+      </q-table>
+    </div>
   </q-page>
 </template>
 
@@ -13,27 +45,71 @@ import { defineComponent, ref } from "vue";
 import { api } from "boot/axios";
 import { useQuasar } from "quasar";
 
+const gamesColumns = [
+  {
+    name: "name",
+    label: "Name",
+    field: "name",
+    sortable: true,
+    align: "left",
+  },
+  {
+    name: "rating",
+    label: "Rating",
+    field: "rating",
+    sortable: true,
+    align: "left",
+    format: (val, row) => {
+      if (val === 0) {
+        return "";
+      }
+      const floored = Math.floor(val);
+      return `${floored}%`;
+    },
+  },
+  {
+    name: "link",
+    label: "IGDB",
+    field: "igdburl",
+    sortable: false,
+  },
+];
+const gamesRows = [];
+
 export default defineComponent({
   name: "PageIndex",
+  data() {
+    return {
+      gamesColumns,
+      gamesRows,
+      initialPagination: {
+        rowsPerPage: 0,
+      },
+    };
+  },
   setup() {
     const $q = useQuasar();
-    const data = ref(null);
+    const games = ref(null);
 
     function loadData() {
       api
-        .get(
-          "https://catalog.gamepass.com/sigls/v2?id=29a81209-df6f-41fd-a528-2ae6b91f719c&language=en-us&market=US"
-        )
+        .get("http://localhost:9000/games/all")
         .then((response) => {
-          data.value = response.data;
-          console.log(data.value);
+          games.value = response.data;
+          //console.log(games.value);
         })
         .catch((err) => {
-          console.log("kaputt", err);
+          console.log(err);
         });
     }
 
-    return { data, loadData };
+    return { games, loadData, filter: ref("") };
+  },
+  watch: {
+    games(newGames, oldGames) {
+      console.log(newGames);
+      this.gamesRows = newGames;
+    },
   },
   mounted() {
     this.loadData();
