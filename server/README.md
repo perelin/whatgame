@@ -2,7 +2,7 @@
 
 ## Heroku
 
-deployment over github main branch
+deployment over github main branch (in heoku deploy console)
 heroku logs -a p2-whatgame-server -t
 
 ## Twitch
