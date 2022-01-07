@@ -93,7 +93,8 @@ export default defineComponent({
 
     function loadData() {
       api
-        .get("http://localhost:9000/games/all")
+        //.get("http://localhost:9000/games/all")
+        .get(process.env.API_URL)
         .then((response) => {
           games.value = response.data;
           //console.log(games.value);
