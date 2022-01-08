@@ -2,7 +2,7 @@
   <q-page class="flex flex-center">
     <div class="q-pa-md">
       <q-table
-        title="Games"
+        title="Game Pass Games"
         :rows="gamesRows"
         :columns="gamesColumns"
         row-key="id"
