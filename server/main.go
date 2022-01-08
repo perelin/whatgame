@@ -289,20 +289,6 @@ func getMSGPGameIDs() ([]string, error) {
 	return msgpIDs, nil
 }
 
-func getMSGPGameDetails(gameID string) (microsoftgp.GamepassGameDetails, error) {
-	client := resty.New()
-	requestURL := "https://displaycatalog.mp.microsoft.com/v7.0/products?bigIds=" + gameID + "&market=US&languages=en-us&MS-CV=DGU1mcuYo0WMMp"
-	var gamepassResponseGamesDetails microsoftgp.GamepassResponseGamesDetails
-	_, err := client.R().
-		SetResult(&gamepassResponseGamesDetails).
-		ForceContentType("application/json").
-		Get(requestURL)
-	if err != nil {
-		return microsoftgp.GamepassGameDetails{}, err
-	}
-	return gamepassResponseGamesDetails.Products[0], nil
-}
-
 func getMSGPGamesDetails(gameIDs []string) ([]microsoftgp.GamepassGameDetails, error) {
 	client := resty.New()
 	gameIDsJoined := strings.Join(gameIDs, ",")
