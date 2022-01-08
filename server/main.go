@@ -11,7 +11,6 @@ import (
 	"whatgameserver/internal/microsoftgp"
 
 	"github.com/Henry-Sarabia/igdb/v2"
-	"github.com/davecgh/go-spew/spew"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/go-resty/resty/v2"
@@ -51,6 +50,7 @@ func CORSMiddleware() gin.HandlerFunc {
 }
 
 func init() {
+	log.Println(os.Getenv("GIN_MODE"))
 	idgbClientID = os.Getenv("IGDB_CLIENT_ID")
 	idgbAccessToken = os.Getenv("IGDB_ACCESS_TOKEN")
 
@@ -58,7 +58,6 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	spew.Dump(opt)
 	rdb = redis.NewClient(opt)
 
 	// redisURI = os.Getenv("REDIS_URL")
