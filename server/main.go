@@ -249,7 +249,7 @@ func cacheAllGames() error {
 		}
 		log.Println(gameMissing, game)
 		games = append(games, game)
-		if i > 10 {
+		if os.Getenv("GIN_MODE") == "debug" && i > 10 {
 			break
 		}
 	}

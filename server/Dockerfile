@@ -27,4 +27,5 @@ FROM alpine
 
 USER appuser
 COPY --from=builder /build/server  /app/server
+COPY --from=builder /build/missingGames.json  /app/missingGames.json
 CMD ["/app/server"]
