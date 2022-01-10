@@ -11,6 +11,7 @@ import (
 	"whatgameserver/internal/microsoftgp"
 
 	"github.com/Henry-Sarabia/igdb/v2"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/go-resty/resty/v2"
@@ -140,8 +141,23 @@ func main() {
 	r.GET("/games/all", func(c *gin.Context) {
 		gamesJSON, err := rdb.Get(ctx, "games").Result()
 		if err != nil {
+			log.Println("GET(/games/all)", err)
 			c.JSON(500, gin.H{
-				"msg": err,
+				"msg": "couldnt find any games, maybe cache needs to be warmed up",
+				"err": err,
+			})
+			return
+		}
+		c.String(200, "%s", gamesJSON)
+	})
+
+	r.GET("/igdb/game", func(c *gin.Context) {
+		gamesJSON, err := rdb.Get(ctx, "games").Result()
+		if err != nil {
+			log.Println("GET(/games/all)", err)
+			c.JSON(500, gin.H{
+				"msg": "couldnt find any games, maybe cache needs to be warmed up",
+				"err": err,
 			})
 			return
 		}
@@ -166,19 +182,39 @@ func main() {
 }
 
 func cacheAllGames() error {
+
+	var igdbMatches = 0
+	var games = []Game{}
+	var missingGames = []Game{}
+	var missingGamesIGDBResults [][]*igdb.Game
+
+	// Load mapped missing games
+	var mappedMissingGames []Game
+	mappedMissingGamesJSON, err := os.ReadFile("missingGames.json")
+	if err != nil {
+		log.Println(err)
+	} else {
+		if err := json.Unmarshal(mappedMissingGamesJSON, &mappedMissingGames); err != nil {
+			log.Println(err)
+		}
+	}
+	spew.Dump(mappedMissingGames)
+
+	// Load MSGP games
 	msgpGames, err := getAllMSPGGames()
 	if err != nil {
 		return err
 	}
-	var igdbMatches = 0
-	var games = []Game{}
+
 	for i, msgpGame := range msgpGames {
 		var game Game = Game{}
+		var gameMissing bool = true
 		game.Name = msgpGame.LocalizedProperties[0].ProductTitle
 		game.GPID = msgpGame.ProductID
 		igdbGameSearchResults, err := getIGDBGameSearchResults(msgpGame.LocalizedProperties[0].ProductTitle)
 		if err != nil {
 			log.Println(err)
+
 		}
 		for _, igdbGame := range igdbGameSearchResults {
 			if msgpGame.LocalizedProperties[0].ProductTitle == igdbGame.Name {
@@ -186,18 +222,51 @@ func cacheAllGames() error {
 				game.IGDBURL = igdbGame.URL
 				game.IGDBID = igdbGame.ID
 				game.Rating = igdbGame.Rating
+				gameMissing = false
 				break
 			}
 		}
-		log.Println(game)
+		if gameMissing {
+			for _, mappedMissingGame := range mappedMissingGames {
+				if msgpGame.ProductID == mappedMissingGame.GPID {
+					igdbGame, err := getIGDBGameByID(mappedMissingGame.IGDBID)
+					if err != nil {
+						log.Println(err)
+						break
+					}
+					//spew.Dump(igdbGameSearchResults)
+					igdbMatches = igdbMatches + 1
+					game.IGDBURL = igdbGame.URL
+					game.IGDBID = igdbGame.ID
+					game.Rating = igdbGame.Rating
+					gameMissing = false
+				}
+			}
+		}
+		if gameMissing {
+			missingGames = append(missingGames, game)
+			missingGamesIGDBResults = append(missingGamesIGDBResults, igdbGameSearchResults)
+		}
+		log.Println(gameMissing, game)
 		games = append(games, game)
 		if i > 10 {
-			//break
+			break
 		}
 	}
 	log.Println("total igdbMatches:", igdbMatches, "from", len(msgpGames))
 	gamesJSON, _ := json.Marshal(games)
 	err = rdb.Set(ctx, "games", gamesJSON, 0).Err()
+	if err != nil {
+		return err
+	}
+	log.Println("total missing:", len(missingGames))
+	missingGamesJSON, _ := json.Marshal(missingGames)
+	err = rdb.Set(ctx, "missingGames", missingGamesJSON, 0).Err()
+	if err != nil {
+		return err
+	}
+	missingGamesIGDBResultsJSON, _ := json.Marshal(missingGamesIGDBResults)
+	err = rdb.Set(ctx, "missingGamesIGDBResults", missingGamesIGDBResultsJSON, 0).Err()
 	if err != nil {
 		return err
 	}
@@ -229,9 +298,9 @@ func ExampleClient() {
 	// key2 does not exist
 }
 
-func getIGDBGameSearchResults(gameID string) ([]*igdb.Game, error) {
+func getIGDBGameSearchResults(gameTitel string) ([]*igdb.Game, error) {
 	igdbClient := igdb.NewClient(idgbClientID, idgbAccessToken, nil)
-	games, err := igdbClient.Games.Search(gameID,
+	games, err := igdbClient.Games.Search(gameTitel,
 		igdb.SetFields("name",
 			"rating",
 			"rating_count",
@@ -253,6 +322,32 @@ func getIGDBGameSearchResults(gameID string) ([]*igdb.Game, error) {
 		return []*igdb.Game{}, err
 	}
 	return games, nil
+}
+
+func getIGDBGameByID(gameID int) (*igdb.Game, error) {
+	igdbClient := igdb.NewClient(idgbClientID, idgbAccessToken, nil)
+	game, err := igdbClient.Games.Get(gameID,
+		igdb.SetFields("name",
+			"rating",
+			"rating_count",
+			"aggregated_rating",
+			"total_rating",
+			"total_rating_count",
+			"url",
+			"category",
+			"status",
+			"artworks",
+			"release_dates",
+			"storyline",
+			"summary",
+			"themes",
+			"version_title",
+			"videos",
+			"websites"))
+	if err != nil {
+		return &igdb.Game{}, err
+	}
+	return game, nil
 }
 
 func getAllMSPGGames() ([]microsoftgp.GamepassGameDetails, error) {
@@ -282,9 +377,9 @@ func getMSGPGameIDs() ([]string, error) {
 	}
 	var msgpIDs []string
 	gamepassResponseAllGamesTruncated := gamepassResponseAllGames[1:]
-	for i, game := range gamepassResponseAllGamesTruncated {
+	for _, game := range gamepassResponseAllGamesTruncated {
 		msgpIDs = append(msgpIDs, game.ID)
-		fmt.Println(i, game.ID)
+		// fmt.Println(i, game.ID)
 	}
 	return msgpIDs, nil
 }
