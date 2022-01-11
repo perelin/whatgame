@@ -1,4 +1,4 @@
-package igdb
+package igdbapi
 
 type IGDBGameResponse struct {
 	Games []IGDBGame `json:"games"`
