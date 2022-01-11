@@ -61,7 +61,7 @@ func cacheAllGames() error {
 
 	// Load mapped missing games
 	var mappedMissingGames []Game
-	mappedMissingGamesJSON, err := os.ReadFile("missingGames.json")
+	mappedMissingGamesJSON, err := os.ReadFile("./missingGames.json")
 	if err != nil {
 		log.Println(err)
 	} else {
