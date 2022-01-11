@@ -94,7 +94,7 @@ func cacheAllGames() error {
 				igdbMatches = igdbMatches + 1
 				game.IGDBURL = igdbGame.URL
 				game.IGDBID = igdbGame.ID
-				game.Rating = igdbGame.Rating
+				game.Rating = igdbGame.TotalRating
 				gameMissing = false
 				break
 			}
@@ -111,7 +111,7 @@ func cacheAllGames() error {
 					igdbMatches = igdbMatches + 1
 					game.IGDBURL = igdbGame.URL
 					game.IGDBID = igdbGame.ID
-					game.Rating = igdbGame.Rating
+					game.Rating = igdbGame.TotalRating
 					gameMissing = false
 				}
 			}
