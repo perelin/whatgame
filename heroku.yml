@@ -8,4 +8,4 @@ setup:
 release:
   image: web
   command:
-    - curl https://hookb.in/LgQJWe7edKU18Vqq803l/\?src\=heroku
+    - curl -X PUT https://p2-whatgame-server.herokuapp.com/games/cache
