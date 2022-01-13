@@ -25,6 +25,11 @@ RUN go build -v -o server
 
 FROM alpine
 
+RUN apk update \
+    && apk add \
+    curl \
+    && rm -rf /var/cache/apk/*
+
 USER appuser
 COPY --from=builder /build/server  /app/server
 COPY --from=builder /build/missingGames.json  /app/missingGames.json
