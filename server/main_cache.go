@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"whatgameserver/internal/helper"
 	"whatgameserver/internal/igdbapi"
@@ -59,46 +60,48 @@ func cacheAllGames() error {
 	var missingGames = []Game{}
 	var missingGamesIGDBResults [][]*igdb.Game
 
-	// Load mapped missing games
-	var mappedMissingGames []Game
-	mappedMissingGamesJSON, err := os.ReadFile("./missingGames.json")
-	if err != nil {
-		log.Println(err)
-	} else {
-		if err := json.Unmarshal(mappedMissingGamesJSON, &mappedMissingGames); err != nil {
-			log.Println(err)
-		}
-	}
-	spew.Dump(mappedMissingGames)
-
 	// Load MSGP games
 	msgpGames, err := microsoftgp.GetAllMSPGGames()
 	if err != nil {
 		return err
 	}
 
-	for i, msgpGame := range msgpGames {
-		var game Game = Game{}
-		var gameMissing bool = true
-		game.Name = msgpGame.LocalizedProperties[0].ProductTitle
-		game.GPID = msgpGame.ProductID
-		igdbGameSearchResults, err := igdbapi.GetIGDBGameSearchResults(msgpGame.LocalizedProperties[0].ProductTitle)
-		if err != nil {
+	// Load mapped missing games
+	var mappedMissingGames []Game
+	mappedMissingGamesJSON, err := os.ReadFile("./missingGames.json")
+	if err != nil {
+		log.Println("no missingGames mapping file found", err)
+	} else {
+		if err := json.Unmarshal(mappedMissingGamesJSON, &mappedMissingGames); err != nil {
 			log.Println(err)
 		}
+		log.Println("loaded manually maped games from file:", len(mappedMissingGames))
+	}
+
+	// Iterate over all loaded MSGP games
+	for i, msgpGame := range msgpGames {
+
+		var game Game = Game{}
+		var gameMissing bool = true
+
+		game = mapMSGPData(msgpGame, game)
+
+		igdbGameSearchResults, err := igdbapi.GetIGDBGameSearchResults(msgpGame.LocalizedProperties[0].ProductTitle)
+		if err != nil {
+			log.Println("couldnt retrieve IGDB results:", err)
+		}
+
+		// Find matching IGDB game through titel comparison
 		for _, igdbGame := range igdbGameSearchResults {
-			msgpTitle := helper.StandardizeString(msgpGame.LocalizedProperties[0].ProductTitle)
-			igdbTitle := helper.StandardizeString(igdbGame.Name)
-			log.Println(msgpTitle, igdbTitle)
-			if msgpTitle == igdbTitle {
+			if helper.NormalizeTitelString(msgpGame.LocalizedProperties[0].ProductTitle) ==
+				helper.NormalizeTitelString(igdbGame.Name) {
+				game = mapIGDBData(igdbGame, game)
 				igdbMatches = igdbMatches + 1
-				game.IGDBURL = igdbGame.URL
-				game.IGDBID = igdbGame.ID
-				game.Rating = igdbGame.TotalRating
 				gameMissing = false
 				break
 			}
 		}
+		// Find matching IGDB game in manually mapped games
 		if gameMissing {
 			for _, mappedMissingGame := range mappedMissingGames {
 				if msgpGame.ProductID == mappedMissingGame.GPID {
@@ -107,11 +110,8 @@ func cacheAllGames() error {
 						log.Println(err)
 						break
 					}
-					//spew.Dump(igdbGameSearchResults)
+					game = mapIGDBData(igdbGame, game)
 					igdbMatches = igdbMatches + 1
-					game.IGDBURL = igdbGame.URL
-					game.IGDBID = igdbGame.ID
-					game.Rating = igdbGame.TotalRating
 					gameMissing = false
 				}
 			}
@@ -120,7 +120,6 @@ func cacheAllGames() error {
 			missingGames = append(missingGames, game)
 			missingGamesIGDBResults = append(missingGamesIGDBResults, igdbGameSearchResults)
 		}
-		log.Println(gameMissing, game)
 		games = append(games, game)
 		if os.Getenv("GIN_MODE") == "debug" && i > 10 {
 			break
@@ -144,4 +143,36 @@ func cacheAllGames() error {
 		return err
 	}
 	return nil
+}
+
+func getMSGPStartDate(msgpGame microsoftgp.GamepassGameDetails) {
+	//log.Println("MSGP Game:", i, msgpGame.LocalizedProperties[0].ProductTitle)
+	//log.Println("MSGP Game:", i, msgpGame.MarketProperties[0].OriginalReleaseDate)
+	//game.GPStartDate = msgpGame.DisplaySkuAvailabilities[0].Sku.Properties.Packages[0].PlatformDependencies[0].PlatformName
+
+	for _, msgpgamePackages := range msgpGame.DisplaySkuAvailabilities[0].Sku.Properties.Packages {
+
+		//log.Println("PlatformName", msgpgamePackages.PlatformDependencies[0].PlatformName)
+		if msgpgamePackages.PlatformDependencies[0].PlatformName == "Windows.Xbox" {
+			spew.Dump(msgpgamePackages)
+		}
+	}
+}
+
+func mapMSGPData(msgpGame microsoftgp.GamepassGameDetails, game Game) Game {
+	game.Name = msgpGame.LocalizedProperties[0].ProductTitle
+	game.GPID = msgpGame.ProductID
+	game.GPReleaseDate = msgpGame.MarketProperties[0].OriginalReleaseDate
+	game.GPReleaseDateTimestamp = msgpGame.MarketProperties[0].OriginalReleaseDate.Unix()
+	return game
+}
+
+func mapIGDBData(igdbGame *igdb.Game, game Game) Game {
+	game.IGDBID = igdbGame.ID
+	game.IGDBURL = igdbGame.URL
+	game.Name = igdbGame.Name
+	game.Rating = igdbGame.TotalRating
+	game.IGDBFirstReleaseDate = time.Unix(int64(igdbGame.FirstReleaseDate), 0)
+	game.IGDBFirstReleaseDateTimestamp = igdbGame.FirstReleaseDate
+	return game
 }

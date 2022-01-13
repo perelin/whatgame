@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"whatgameserver/internal/igdbapi"
 
@@ -15,12 +16,18 @@ import (
 )
 
 type Game struct {
-	Name    string  `json:"name"`
-	Rating  float64 `json:"rating"`
-	Image   string  `json:"image"`
-	IGDBURL string  `json:"igdburl"`
-	IGDBID  int     `json:"igdbid"`
-	GPID    string  `json:"gpid"`
+	Name                          string    `json:"name"`
+	Rating                        float64   `json:"rating"`
+	Image                         string    `json:"image"`
+	IGDBURL                       string    `json:"igdburl"`
+	IGDBID                        int       `json:"igdbid"`
+	IGDBFirstReleaseDate          time.Time `json:"igdbfirstreleasedate"`
+	IGDBFirstReleaseDateTimestamp int       `json:"igdbfirstreleasedatetimestamp"`
+	GPID                          string    `json:"gpid"`
+	GPReleaseDate                 time.Time `json:"gpreleasedate"`
+	GPReleaseDateTimestamp        int64     `json:"gpreleasedatetimestamp"`
+	GPStartDate                   time.Time `json:"gpstartdate"`
+	GPEndDate                     time.Time `json:"gpenddate"`
 }
 
 func CORSMiddleware() gin.HandlerFunc {

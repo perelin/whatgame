@@ -15,7 +15,7 @@ func RemoveSpecialChars(inputString string) string {
 	return reg.ReplaceAllString(inputString, "")
 }
 
-func StandardizeString(inputString string) string {
+func NormalizeTitelString(inputString string) string {
 	removedSpecialChars := RemoveSpecialChars(inputString)
 	return strings.ToLower(removedSpecialChars)
 }

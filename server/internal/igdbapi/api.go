@@ -28,6 +28,7 @@ func GetIGDBGameSearchResults(gameTitel string) ([]*igdb.Game, error) {
 			"status",
 			"artworks",
 			"release_dates",
+			"first_release_date",
 			"storyline",
 			"summary",
 			"themes",

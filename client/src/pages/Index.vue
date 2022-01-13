@@ -43,7 +43,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { api } from "boot/axios";
-import { useQuasar } from "quasar";
+import { useQuasar, date } from "quasar";
 
 const gamesColumns = [
   {
@@ -52,6 +52,49 @@ const gamesColumns = [
     field: "name",
     sortable: true,
     align: "left",
+  },
+
+  // {
+  //   name: "gpreleasedate",
+  //   label: "Release",
+  //   field: "gpreleasedatetimestamp",
+  //   sortable: true,
+  //   align: "left",
+  // },
+  // {
+  //   name: "igdbfirstreleasedatetimestamp",
+  //   label: "Release",
+  //   field: "igdbfirstreleasedatetimestamp",
+  //   sortable: true,
+  //   align: "left",
+  // },
+  {
+    name: "igdbfirstreleasedate",
+    label: "Original Release",
+    field: "igdbfirstreleasedatetimestamp",
+    sortable: true,
+    align: "left",
+    format: (val, row) => {
+      if (val === 0) {
+        return "?";
+      }
+      const releaseDate = new Date(val * 1000);
+      return date.formatDate(releaseDate, "YYYY-MM");
+    },
+  },
+  {
+    name: "gpreleasedate",
+    label: "Xbox Release",
+    field: "gpreleasedatetimestamp",
+    sortable: true,
+    align: "left",
+    format: (val, row) => {
+      if (val === 0) {
+        return "?";
+      }
+      const releaseDate = new Date(val * 1000);
+      return date.formatDate(releaseDate, "YYYY-MM");
+    },
   },
   {
     name: "rating",
@@ -93,11 +136,10 @@ export default defineComponent({
 
     function loadData() {
       api
-        //.get("http://localhost:9000/games/all")
         .get(process.env.API_URL)
         .then((response) => {
           games.value = response.data;
-          //console.log(games.value);
+          console.log(games.value);
         })
         .catch((err) => {
           console.log(err);
