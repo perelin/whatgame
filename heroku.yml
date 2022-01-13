@@ -5,3 +5,7 @@ build:
 setup:
   addons:
     - plan: heroku-redis
+release:
+  image: web
+  command:
+    - curl https://hookb.in/LgQJWe7edKU18Vqq803l/\?src\=heroku
