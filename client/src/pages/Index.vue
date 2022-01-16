@@ -9,13 +9,26 @@
         :pagination="initialPagination"
         :filter="filter"
       >
-        <template #body-cell-link="props">
+        <template #body-cell-igdbLink="props">
           <q-td class="bg-blue-1" :props="props">
             <q-btn
               v-if="props.value != ''"
               color="white"
               text-color="black"
-              label="link"
+              label="IGDB"
+              :href="props.value"
+              target="_blank"
+            />
+          </q-td>
+        </template>
+
+        <template #body-cell-gpLink="props">
+          <q-td class="bg-blue-1" :props="props">
+            <q-btn
+              v-if="props.value != ''"
+              color="white"
+              text-color="black"
+              label="GamePass"
               :href="props.value"
               target="_blank"
             />
@@ -76,7 +89,7 @@ const gamesColumns = [
     align: "left",
     format: (val, row) => {
       if (val === 0) {
-        return "?";
+        return "NA";
       }
       const releaseDate = new Date(val * 1000);
       return date.formatDate(releaseDate, "YYYY-MM");
@@ -90,7 +103,7 @@ const gamesColumns = [
     align: "left",
     format: (val, row) => {
       if (val === 0) {
-        return "?";
+        return "NA";
       }
       const releaseDate = new Date(val * 1000);
       return date.formatDate(releaseDate, "YYYY-MM");
@@ -104,17 +117,26 @@ const gamesColumns = [
     align: "left",
     format: (val, row) => {
       if (val === 0) {
-        return "";
+        return "NA";
       }
       const floored = Math.floor(val);
       return `${floored}%`;
     },
   },
   {
-    name: "link",
+    name: "igdbLink",
     label: "IGDB",
     field: "igdburl",
     sortable: false,
+  },
+  {
+    name: "gpLink",
+    label: "GamePass",
+    field: "gpid",
+    sortable: false,
+    format: (val, row) => {
+      return `https://www.xbox.com/en-us/games/store/gamename/${val}`;
+    },
   },
 ];
 const gamesRows = [];
