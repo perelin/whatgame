@@ -1,490 +1,577 @@
 [
   {
     "name": "AI: THE SOMNIUM FILES",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 104971,
     "gpid": "9P3RMG6MSCFB"
   },
   {
     "name": "ANVIL : Vault Breaker (Game Preview)",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 142861,
     "gpid": "9PJPV2PC3MWR"
   },
   {
     "name": "ARK: Survival Evolved Explorer's Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 118717,
     "gpid": "BPP79RSDN892"
   },
   {
     "name": "Battlefield™ 1 Revolution",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 94085,
     "gpid": "BPL68T0XK96W"
   },
   {
     "name": "Battlefield™ V",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 83728,
     "gpid": "BZ2N7TQ0XCF2"
   },
   {
     "name": "BLiNX: The Time Sweeper",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 5751,
     "gpid": "BRG51C5MWFSG"
   },
   {
     "name": "ClusterTruck",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 18484,
     "gpid": "BX4J85JZNGXQ"
   },
   {
     "name": "CODE VEIN",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 28168,
     "gpid": "C4Q7K19Q0VBZ"
   },
   {
     "name": "Dark Alliance",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 127348,
     "gpid": "9MZ55WCBW7TK"
   },
   {
     "name": "Dead Space™",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 37,
     "gpid": "BRJLJ6RPLQTJ"
   },
   {
     "name": "Dragon Age™: Inquisition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 1887,
     "gpid": "C47GZZBMR5WG"
   },
   {
     "name": "DRAGON QUEST BUILDERS 2",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 54548,
     "gpid": "9PFD00CZJ35V"
   },
   {
     "name": "Enter The Gungeon",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 11182,
     "gpid": "9NB65S6LFZRT"
   },
   {
     "name": "Human Fall Flat",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 16992,
     "gpid": "BSMZH25V6V46"
   },
   {
     "name": "Injustice™ 2",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 19470,
     "gpid": "BPKVH4C4XV4N"
   },
   {
     "name": "Kameo",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 7029,
     "gpid": "BV83SM3191S5"
   },
   {
     "name": "KILLER QUEEN BLACK",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 103342,
     "gpid": "9N7J7104W0K1"
   },
   {
     "name": "LIMBO",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 1331,
     "gpid": "BTQMHK78ZPF9"
   },
   {
     "name": "LUMINES REMASTERED",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 94970,
     "gpid": "BNVQ3TXZ3JH4"
   },
   {
     "name": "Mass Effect™: Andromeda",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 7349,
     "gpid": "BZPR04V49BMH"
   },
   {
     "name": "Banjo Kazooie: N n B",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 3008,
     "gpid": "BVR64CDJ01FJ"
   },
   {
     "name": "Bassmaster® Fishing 2022",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 169996,
     "gpid": "9MTTMQ6WSDP8"
   },
   {
-    "name": "Batman™: Arkham Knight",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
-    "igdbid": 42929,
-    "gpid": "BSLX1RNXR6H7"
-  },
-  {
     "name": "Crimson Skies®: High Road to Revenge™",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 5793,
     "gpid": "C4B8XR1LCXR5"
   },
   {
     "name": "Darkest Dungeon®",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 8965,
     "gpid": "BXKVN6G9C5WJ"
   },
   {
     "name": "DEEEER Simulator: Your Average Everyday Deer Game",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 114764,
     "gpid": "9NNBPBM2F60W"
   },
   {
-    "name": "Dishonored® Definitive Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
-    "igdbid": 20863,
-    "gpid": "C299QVC2BSJF"
-  },
-  {
     "name": "Dishonored®: Death of the Outsider™",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 37030,
     "gpid": "C5F2XDQPPJKZ"
   },
   {
     "name": "DOOM (1993)",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 673,
     "gpid": "9PLZPHBNHTMF"
   },
   {
     "name": "DOOM Eternal Standard Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 103298,
     "gpid": "9P5S26314HWQ"
   },
   {
     "name": "DRAGON BALL FIGHTERZ",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 36911,
     "gpid": "BZRK5C951KK7"
   },
   {
     "name": "DRAGON QUEST® XI S: Echoes of an Elusive Age™ - Definitive Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 11667,
     "gpid": "9PBDC0XZ8TXK"
   },
   {
     "name": "Elite Dangerous Standard Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 2955,
     "gpid": "C3LW50BQJ878"
   },
   {
     "name": "F1® 2019",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 116667,
     "gpid": "BP4H9HD3FSWB"
   },
   {
     "name": "Football Manager 2022 Xbox Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 168537,
     "gpid": "9P982VRDSV6G"
   },
   {
     "name": "FOR HONOR™ Standard Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 11162,
     "gpid": "C3HQKX3B35PD"
   },
   {
     "name": "Forza Horizon 4 Standard Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 82090,
     "gpid": "9PNJXVCVWD4K"
   },
   {
     "name": "Forza Horizon 5 Standard Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 141503,
     "gpid": "9NKX70BBCDRN"
   },
   {
     "name": "Fuzion Frenzy®",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 5842,
     "gpid": "C2P985H1H42H"
   },
   {
     "name": "Generation Zero®",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 65445,
     "gpid": "C20WW4W29FQ1"
   },
   {
     "name": "Grounded - Game Preview",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 125624,
     "gpid": "9PJTHRNVH62H"
   },
   {
     "name": "Halo Infinite (Campaign)",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 103281,
     "gpid": "9NP1P1WFS0LB"
   },
   {
     "name": "Halo Wars 2: Standard Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 11570,
     "gpid": "C42KCJCLX6MX"
   },
   {
     "name": "It Takes Two - Digital Version",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 135243,
     "gpid": "9NXVC0482QS5"
   },
   {
     "name": "MLB® The Show™ 21 Xbox Series X | S",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 143260,
     "gpid": "9NSDL005MBTG"
   },
   {
     "name": "NieR:Automata™ BECOME AS GODS Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 11208,
     "gpid": "BPPZVT8BZ15N"
   },
   {
     "name": "Outlast 2",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 14390,
     "gpid": "BZVPNM21TCJC"
   },
   {
     "name": "Raji: An Ancient Epiс",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 70828,
     "gpid": "9NH2J7X3MPB0"
   },
   {
     "name": "Rush: A DisneyPixar Adventure",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 55072,
     "gpid": "9P3PL76N0KWZ"
   },
   {
     "name": "Second Extinction™ (Game Preview)",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 133309,
     "gpid": "9P9JZLNFQ9PT"
   },
   {
     "name": "Spiritfarer®: Farewell Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 119304,
     "gpid": "9NG5L58FD3X5"
   },
   {
     "name": "Tell Me Why: Chapters 1-3",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 125628,
     "gpid": "9NF83PRZK6K3"
   },
   {
     "name": "The Bard's Tale ARPG : Remastered and Resnarkled",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 54782,
     "gpid": "9PN3VDFTB5HZ"
   },
   {
     "name": "The Elder Scrolls® Online",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 1081,
     "gpid": "BRKX5CRMRTC2"
   },
   {
     "name": "The Evil Within® 2",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 36813,
     "gpid": "C40860J5R2MP"
   },
   {
     "name": "The Walking Dead: A New Frontier - The Complete Season (Episodes 1-5)",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 19000,
     "gpid": "BQR7QS0F8SJ3"
   },
   {
     "name": "The Walking Dead: Michonne - The Complete Season",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 11204,
     "gpid": "C2XNJC9WK15X"
   },
   {
     "name": "Tom Clancy's Rainbow Six® Siege Deluxe Edition",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 7360,
     "gpid": "9P30K2NXWH82"
   },
   {
     "name": "Train Sim World® 2",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 136868,
     "gpid": "9PBB13RDD77Z"
   },
   {
     "name": "Viva Piñata: TIP",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 7238,
     "gpid": "BS1NPTPJGD4G"
   },
   {
     "name": "Wolfenstein® II: The New Colossus™",
-    "rating": 0,
-    "image": "",
-    "igdburl": "",
     "igdbid": 36952,
     "gpid": "C4LLMHFQ1BXQ"
+  },
+  {
+    "name": "art of rally",
+    "igdbid": 118607,
+    "gpid": "9P6JQDDZ2MQB"
+  },
+  {
+    "name": "Banjo-Kazooie",
+    "igdbid": 2148,
+    "gpid": "BSJG7TTSWVJ2"
+  },
+  {
+    "name": "Batman™: Arkham Knight",
+    "igdbid": 5503,
+    "gpid": "BSLX1RNXR6H7"
+  },
+  {
+    "name": "Crackdown 3",
+    "igdbid": 7333,
+    "gpid": "9NXR6469DM2P"
+  },
+  {
+    "name": "Craftopia",
+    "igdbid": 124448,
+    "gpid": "9NTM9G539XTT"
+  },
+  {
+    "name": "Dandy Ace",
+    "igdbid": 116533,
+    "gpid": "9NQLVQTLPRS1"
+  },
+  {
+    "name": "DayZ",
+    "igdbid": 2117,
+    "gpid": "BSR9NLHVF1KL"
+  },
+  {
+    "name": "Dead by Daylight",
+    "igdbid": 18866,
+    "gpid": "C0N22P73QZ60"
+  },
+  {
+    "name": "Dicey Dungeons",
+    "igdbid": 102420,
+    "gpid": "9PC4C9NLP3ZD"
+  },
+  {
+    "name": "Dishonored® Definitive Edition",
+    "igdbid": 533,
+    "gpid": "C299QVC2BSJF"
+  },
+  {
+    "name": "Disneyland Adventures",
+    "igdbid": 108251,
+    "gpid": "9N6Z8DQXSQWH"
+  },
+  {
+    "name": "Evil Genius 2: World Domination",
+    "igdbid": 44074,
+    "gpid": "9NPC5398SCQ6"
+  },
+  {
+    "name": "Farming Simulator 19",
+    "igdbid": 87210,
+    "gpid": "BQW91W950J67"
+  },
+  {
+    "name": "Gears of War 3",
+    "igdbid": 492,
+    "gpid": "BPKDQSSFQ9WV"
+  },
+  {
+    "name": "Goat Simulator",
+    "igdbid": 5335,
+    "gpid": "BV0NM309K1TL"
+  },
+  {
+    "name": "Grand Theft Auto: San Andreas – The Definitive Edition",
+    "igdbid": 732,
+    "gpid": "9P7RSGG6Z699"
+  },
+  {
+    "name": "Hellblade: Senua's Sacrifice",
+    "igdbid": 7603,
+    "gpid": "C4Z7QM8FSXM2"
+  },
+  {
+    "name": "Jetpac Refuelled",
+    "igdbid": 7854,
+    "gpid": "BRRVN5198461"
+  },
+  {
+    "name": "MechWarrior 5: Mercenaries",
+    "igdbid": 26227,
+    "gpid": "9PB86W3JK8Z5"
+  },
+  {
+    "name": "Moonglow Bay",
+    "igdbid": 145073,
+    "gpid": "9P7VCSGBP9KL"
+  },
+  {
+    "name": "Mount \u0026 Blade: Warband",
+    "igdbid": 2025,
+    "gpid": "BQXN1S3V3FN9"
+  },
+  {
+    "name": "Myst",
+    "igdbid": 236,
+    "gpid": "9P6PQLFP9BN0"
+  },
+  {
+    "name": "Neoverse",
+    "igdbid": 113750,
+    "gpid": "9NNSTP6KJTZ9"
+  },
+  {
+    "name": "Oblivion",
+    "igdbid": 59,
+    "gpid": "C5K89TFLSV19"
+  },
+  {
+    "name": "OCTOPATH TRAVELER",
+    "igdbid": 26765,
+    "gpid": "9N9606CC950J"
+  },
+  {
+    "name": "Overcooked! 2",
+    "igdbid": 103341,
+    "gpid": "BVJLKDG2TX8H"
+  },
+  {
+    "name": "Perfect Dark Zero",
+    "igdbid": 1465,
+    "gpid": "BZF7N4FQWHNR"
+  },
+  {
+    "name": "Phoenix Point",
+    "igdbid": 27804,
+    "gpid": "9P1P5Q3BNM7J"
+  },
+  {
+    "name": "Power Rangers: Battle for the Grid",
+    "igdbid": 114032,
+    "gpid": "9P5VMG8D4P4B"
+  },
+  {
+    "name": "Rain on Your Parade",
+    "igdbid": 129057,
+    "gpid": "9NS66QNVR00N"
+  },
+  {
+    "name": "Record of Lodoss War-Deedlit in Wonder Labyrinth-",
+    "igdbid": 96394,
+    "gpid": "9NRBH9HS807L"
+  },
+  {
+    "name": "ReCore",
+    "igdbid": 11131,
+    "gpid": "9NBLGGH1Z6FQ"
+  },
+  {
+    "name": "Remnant: From the Ashes",
+    "igdbid": 105049,
+    "gpid": "9PBHXGWZTS2N"
+  },
+  {
+    "name": "RESIDENT EVIL 7 biohazard",
+    "igdbid": 19562,
+    "gpid": "BVFDTJ1XF6CS"
+  },
+  {
+    "name": "Rubber Bandits",
+    "igdbid": 139684,
+    "gpid": "9PL36RW9ZTPW"
+  },
+  {
+    "name": "SCARLET NEXUS",
+    "igdbid": 133302,
+    "gpid": "9N9RMHTJX41P"
+  },
+  {
+    "name": "Sea of Thieves",
+    "igdbid": 11137,
+    "gpid": "9P2N57MC619K"
+  },
+  {
+    "name": "Signs of the Sojourner",
+    "igdbid": 118603,
+    "gpid": "9ND3N9W1VRV1"
+  },
+  {
+    "name": "Slime Rancher",
+    "igdbid": 16287,
+    "gpid": "C2NC88M7NWZ1"
+  },
+  {
+    "name": "Sniper Elite 4",
+    "igdbid": 18366,
+    "gpid": "BZ5VLVX84STW"
+  },
+  {
+    "name": "Superliminal",
+    "igdbid": 68447,
+    "gpid": "9NVR4ZQKNBSB"
+  },
+  {
+    "name": "The Anacrusis (Game Preview)",
+    "igdbid": 152067,
+    "gpid": "9P9S593SLMV7"
+  },
+  {
+    "name": "The Bard's Tale IV: Director's Cut",
+    "igdbid": 26986,
+    "gpid": "C2B4T86TXLRS"
+  },
+  {
+    "name": "The Gunk",
+    "igdbid": 136000,
+    "gpid": "9P008L2LS87F"
+  },
+  {
+    "name": "The Procession to Calvary",
+    "igdbid": 106985,
+    "gpid": "9NW7S04QK7XV"
+  },
+  {
+    "name": "Totally Accurate Battle Simulator",
+    "igdbid": 21642,
+    "gpid": "9PC4RWP34M2D"
+  },
+  {
+    "name": "Viva Piñata",
+    "igdbid": 7236,
+    "gpid": "BSXSL6WBJ0V7"
+  },
+  {
+    "name": "Wasteland 3",
+    "igdbid": 24863,
+    "gpid": "BQ9T0JF0D3L4"
+  },
+  {
+    "name": "Worms W.M.D",
+    "igdbid": 19696,
+    "gpid": "C4BZ7X545J1T"
+  },
+  {
+    "name": "Yakuza 3 Remastered",
+    "igdbid": 2061,
+    "gpid": "9N3460XCS8BC"
+  },
+  {
+    "name": "Yakuza 4 Remastered",
+    "igdbid": 2062,
+    "gpid": "9NXFD44B98P4"
+  },
+  {
+    "name": "Yakuza 6: The Song of Life",
+    "igdbid": 12527,
+    "gpid": "9NK3ZFC5R579"
+  },
+  {
+    "name": "Zombie Army 4: Dead War",
+    "igdbid": 119234,
+    "gpid": "9PLSCHRN5715"
+  },
+  {
+    "name": "New Super Lucky's Tale",
+    "igdbid": 37024,
+    "gpid": "9MZN3SMXN824"
+  },
+  {
+    "name": "Subnautica: Below Zero",
+    "igdbid": 9254,
+    "gpid": "9NDCJXL11096"
+  },
+  {
+    "name": "Nongunz: Doppelganger Edition",
+    "igdbid": 36499,
+    "gpid": "9NRDVCW02JD7"
   }
 ]

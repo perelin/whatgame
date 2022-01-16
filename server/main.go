@@ -9,8 +9,6 @@ import (
 	"os"
 	"time"
 
-	"whatgameserver/internal/igdbapi"
-
 	"github.com/Henry-Sarabia/igdb/v2"
 	"github.com/gin-gonic/gin"
 )
@@ -72,7 +70,9 @@ func main() {
 	})
 	r.GET("/test", func(c *gin.Context) {
 
-		igdbClient := igdb.NewClient(igdbapi.ClientID, igdbapi.AccessToken, nil)
+		igdbClient := igdb.NewClient(os.Getenv("IGDB_CLIENT_ID"),
+			os.Getenv("IGDB_ACCESS_TOKEN"),
+			nil)
 		games, err := igdbClient.Games.Search("Viva Piñata",
 			igdb.SetFields("name",
 				"rating",

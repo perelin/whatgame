@@ -1,0 +1,9 @@
+
+
+### get game info 
+
+//@games=9P8DL6W0JBB8,9P8DL6W0JBB8
+@games=9P9S593SLMV7
+
+GET /v7.0/products?bigIds={{games}}&market=US&languages=en-us&MS-CV=DGU1mcuYo0WMMp HTTP/1.1
+Host: displaycatalog.mp.microsoft.com

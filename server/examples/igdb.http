@@ -1,0 +1,23 @@
+
+@bearerToken=vk3dhw0xaxrc3bld1io8moc94h291d
+
+### get game info
+@gameID=104971
+
+POST https://api.igdb.com/v4/games/ HTTP/1.1
+Client-ID: ofpcxa76vok6ldo3x22kw8yv7cti70
+Authorization: Bearer {{bearerToken}}
+Content-Type: text/plain
+Content-Length: 45
+
+where id = 104971; fields name,release_dates;
+
+### search game
+
+POST https://api.igdb.com/v4/games/ HTTP/1.1
+Client-ID: ofpcxa76vok6ldo3x22kw8yv7cti70
+Authorization: Bearer {{bearerToken}}
+content-type: application/json
+Content-Length: 145
+
+search "Nongunz"; where category = 0; fields name,rating,total_rating,version_title,version_parent,aggregated_rating,category,first_release_date,hypes;

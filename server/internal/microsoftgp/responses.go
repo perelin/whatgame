@@ -106,13 +106,13 @@ type GamepassGameDetails struct {
 			RelationshipType string `json:"RelationshipType"`
 		} `json:"RelatedProducts"`
 		UsageData []struct {
-			AggregateTimeSpan string  `json:"AggregateTimeSpan"`
-			AverageRating     float64 `json:"AverageRating"`
-			PlayCount         int     `json:"PlayCount"`
-			RatingCount       int     `json:"RatingCount"`
-			RentalCount       string  `json:"RentalCount"`
-			TrialCount        string  `json:"TrialCount"`
-			PurchaseCount     string  `json:"PurchaseCount"`
+			AggregateTimeSpan string      `json:"AggregateTimeSpan"`
+			AverageRating     float64     `json:"AverageRating"`
+			PlayCount         interface{} `json:"PlayCount"`
+			RatingCount       int         `json:"RatingCount"`
+			RentalCount       string      `json:"RentalCount"`
+			TrialCount        string      `json:"TrialCount"`
+			PurchaseCount     string      `json:"PurchaseCount"`
 		} `json:"UsageData"`
 		BundleConfig interface{} `json:"BundleConfig"`
 		Markets      []string    `json:"Markets"`

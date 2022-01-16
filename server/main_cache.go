@@ -55,16 +55,20 @@ func ExampleClient() {
 
 func cacheAllGames() error {
 
+	log.Println("starting to retrieve and cache all games from MSGP")
+
 	var igdbMatches = 0
 	var games = []Game{}
 	var missingGames = []Game{}
-	var missingGamesIGDBResults [][]*igdb.Game
+	//var missingGamesIGDBResults [][]*igdb.Game
 
 	// Load MSGP games
+	// msgpGames, err := microsoftgp.GetAllMSPGGames()
 	msgpGames, err := microsoftgp.GetAllMSPGGames()
 	if err != nil {
 		return err
 	}
+	log.Printf("found %d MSGP games", len(msgpGames))
 
 	// Load mapped missing games
 	var mappedMissingGames []Game
@@ -81,6 +85,8 @@ func cacheAllGames() error {
 	// Iterate over all loaded MSGP games
 	for i, msgpGame := range msgpGames {
 
+		log.Println("processing MSGP game:", i, msgpGame.ProductID, msgpGame.LocalizedProperties[0].ProductTitle)
+
 		var game Game = Game{}
 		var gameMissing bool = true
 
@@ -91,16 +97,6 @@ func cacheAllGames() error {
 			log.Println("couldnt retrieve IGDB results:", err)
 		}
 
-		// Find matching IGDB game through titel comparison
-		for _, igdbGame := range igdbGameSearchResults {
-			if helper.NormalizeTitelString(msgpGame.LocalizedProperties[0].ProductTitle) ==
-				helper.NormalizeTitelString(igdbGame.Name) {
-				game = mapIGDBData(igdbGame, game)
-				igdbMatches = igdbMatches + 1
-				gameMissing = false
-				break
-			}
-		}
 		// Find matching IGDB game in manually mapped games
 		if gameMissing {
 			for _, mappedMissingGame := range mappedMissingGames {
@@ -110,19 +106,43 @@ func cacheAllGames() error {
 						log.Println(err)
 						break
 					}
+					log.Println("found matching game in manually mapped:", igdbGame.Name)
 					game = mapIGDBData(igdbGame, game)
 					igdbMatches = igdbMatches + 1
 					gameMissing = false
+					break
 				}
 			}
 		}
+
+		// Find matching IGDB game through titel comparison
+		if gameMissing {
+			for _, igdbGame := range igdbGameSearchResults {
+				if helper.NormalizeTitelString(msgpGame.LocalizedProperties[0].ProductTitle) ==
+					helper.NormalizeTitelString(igdbGame.Name) {
+					log.Println("found matching name", igdbGame.Name, msgpGame.LocalizedProperties[0].ProductTitle)
+
+					// double check if developer / publisher also fits
+					if match, name := checkIfCompaniesMatch(msgpGame, igdbGame); match {
+						log.Println("found matching company:", name)
+						game = mapIGDBData(igdbGame, game)
+						igdbMatches = igdbMatches + 1
+						gameMissing = false
+						break
+					}
+				}
+			}
+		}
+
 		if gameMissing {
 			missingGames = append(missingGames, game)
-			missingGamesIGDBResults = append(missingGamesIGDBResults, igdbGameSearchResults)
+			//missingGamesIGDBResults = append(missingGamesIGDBResults, igdbGameSearchResults)
 		}
+
 		games = append(games, game)
+
 		if os.Getenv("GIN_MODE") == "debug" && i > 10 {
-			break
+			//break
 		}
 	}
 	log.Println("total igdbMatches:", igdbMatches, "from", len(msgpGames))
@@ -137,12 +157,34 @@ func cacheAllGames() error {
 	if err != nil {
 		return err
 	}
-	missingGamesIGDBResultsJSON, _ := json.Marshal(missingGamesIGDBResults)
-	err = rdb.Set(ctx, "missingGamesIGDBResults", missingGamesIGDBResultsJSON, 0).Err()
-	if err != nil {
-		return err
-	}
+	// missingGamesIGDBResultsJSON, _ := json.Marshal(missingGamesIGDBResults)
+	// err = rdb.Set(ctx, "missingGamesIGDBResults", missingGamesIGDBResultsJSON, 0).Err()
+	// if err != nil {
+	// 	return err
+	// }
 	return nil
+}
+
+func checkIfCompaniesMatch(msgpGame microsoftgp.GamepassGameDetails, igdbGame *igdb.Game) (bool, string) {
+
+	for _, involvedCompanyID := range igdbGame.InvolvedCompanies {
+
+		idgbInvolvedCompany, err := igdbapi.GetIGDBInvolvedCompanyByID(involvedCompanyID)
+		if err != nil {
+			log.Println("couldnt retrieve IGDB involved company:", involvedCompanyID, err)
+		}
+
+		idgbCompany, err := igdbapi.GetIGDBCompany(idgbInvolvedCompany.Company)
+		if err != nil {
+			log.Println("couldnt retrieve IGDB company:", idgbCompany, err)
+		}
+
+		if helper.CompareNormalizedStrings(msgpGame.LocalizedProperties[0].DeveloperName, idgbCompany.Name) ||
+			helper.CompareNormalizedStrings(msgpGame.LocalizedProperties[0].PublisherName, idgbCompany.Name) {
+			return true, idgbCompany.Name
+		}
+	}
+	return false, ""
 }
 
 func getMSGPStartDate(msgpGame microsoftgp.GamepassGameDetails) {
