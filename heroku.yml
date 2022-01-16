@@ -5,7 +5,7 @@ build:
 setup:
   addons:
     - plan: heroku-redis
-release:
-  image: web
-  command:
-    - curl -X PUT https://p2-whatgame-server.herokuapp.com/games/cache
+#release:
+#image: web
+#command:
+#- curl -X PUT https://p2-whatgame-server.herokuapp.com/games/cache
