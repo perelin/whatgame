@@ -22,6 +22,7 @@ type Game struct {
 	IGDBFirstReleaseDate          time.Time `json:"igdbfirstreleasedate"`
 	IGDBFirstReleaseDateTimestamp int       `json:"igdbfirstreleasedatetimestamp"`
 	GPID                          string    `json:"gpid"`
+	GPIDAverageRatingAllTime      float64   `json:"gpaverageratingalltime"`
 	GPReleaseDate                 time.Time `json:"gpreleasedate"`
 	GPReleaseDateTimestamp        int64     `json:"gpreleasedatetimestamp"`
 	GPStartDate                   time.Time `json:"gpstartdate"`

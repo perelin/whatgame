@@ -142,7 +142,7 @@ func cacheAllGames() error {
 		games = append(games, game)
 
 		if os.Getenv("GIN_MODE") == "debug" && i > 10 {
-			//break
+			break
 		}
 	}
 	log.Println("total igdbMatches:", igdbMatches, "from", len(msgpGames))
@@ -206,6 +206,7 @@ func mapMSGPData(msgpGame microsoftgp.GamepassGameDetails, game Game) Game {
 	game.GPID = msgpGame.ProductID
 	game.GPReleaseDate = msgpGame.MarketProperties[0].OriginalReleaseDate
 	game.GPReleaseDateTimestamp = msgpGame.MarketProperties[0].OriginalReleaseDate.Unix()
+	game.GPIDAverageRatingAllTime = microsoftgp.GetAverageRatingAllTime(msgpGame)
 	return game
 }
 

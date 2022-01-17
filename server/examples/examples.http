@@ -5,3 +5,8 @@
 
 PUT /games/cache HTTP/1.1
 Host: {{apiURL}}
+
+### Get all games
+
+GET /games/all HTTP/1.1
+Host: {{apiURL}}

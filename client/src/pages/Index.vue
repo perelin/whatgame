@@ -66,21 +66,6 @@ const gamesColumns = [
     sortable: true,
     align: "left",
   },
-
-  // {
-  //   name: "gpreleasedate",
-  //   label: "Release",
-  //   field: "gpreleasedatetimestamp",
-  //   sortable: true,
-  //   align: "left",
-  // },
-  // {
-  //   name: "igdbfirstreleasedatetimestamp",
-  //   label: "Release",
-  //   field: "igdbfirstreleasedatetimestamp",
-  //   sortable: true,
-  //   align: "left",
-  // },
   {
     name: "igdbfirstreleasedate",
     label: "Original Release",
@@ -111,7 +96,7 @@ const gamesColumns = [
   },
   {
     name: "rating",
-    label: "Rating",
+    label: "IGDB Rating",
     field: "rating",
     sortable: true,
     align: "left",
@@ -121,6 +106,21 @@ const gamesColumns = [
       }
       const floored = Math.floor(val);
       return `${floored}%`;
+    },
+  },
+  {
+    name: "gpRating",
+    label: "Xbox Rating",
+    field: "gpaverageratingalltime",
+    sortable: true,
+    align: "left",
+    format: (val, row) => {
+      if (val === 0) {
+        return "NA";
+      }
+      // const floored = Math.floor(val);
+      // return `${floored}%`;
+      return val;
     },
   },
   {

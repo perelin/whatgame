@@ -11,6 +11,15 @@ type GamepassResponseAllGames []struct {
 	ID                string `json:"id,omitempty"`
 }
 
+func GetAverageRatingAllTime(gameDetails GamepassGameDetails) float64 {
+	for _, usageData := range gameDetails.MarketProperties[0].UsageData {
+		if usageData.AggregateTimeSpan == "AllTime" {
+			return usageData.AverageRating
+		}
+	}
+	return 0
+}
+
 type GamepassResponseGamesDetails struct {
 	Products []GamepassGameDetails `json:"Products"`
 }
