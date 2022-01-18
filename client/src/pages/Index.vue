@@ -1,7 +1,8 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page>
     <div class="q-pa-md">
       <q-table
+        :dense="$q.screen.lt.md"
         title="Game Pass Games"
         :rows="gamesRows"
         :columns="gamesColumns"
