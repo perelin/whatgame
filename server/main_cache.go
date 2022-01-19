@@ -19,6 +19,7 @@ import (
 
 var rdb *redis.Client
 var ctx = context.Background()
+var DebugBreaker int = 1000
 
 func init() {
 	opt, err := redis.ParseURL(os.Getenv("REDIS_URL"))
@@ -92,6 +93,11 @@ func cacheAllGames() error {
 
 		game = mapMSGPData(msgpGame, game)
 
+		if microsoftgp.GetAverageRatingAllTime(msgpGame) == 0 {
+			log.Println("skipping game with 0 average rating")
+			continue
+		}
+
 		igdbGameSearchResults, err := igdbapi.GetIGDBGameSearchResults(msgpGame.LocalizedProperties[0].ProductTitle)
 		if err != nil {
 			log.Println("couldnt retrieve IGDB results:", err)
@@ -141,7 +147,7 @@ func cacheAllGames() error {
 
 		games = append(games, game)
 
-		if os.Getenv("GIN_MODE") == "debug" && i > 10 {
+		if os.Getenv("GIN_MODE") == "debug" && i > DebugBreaker {
 			break
 		}
 	}
