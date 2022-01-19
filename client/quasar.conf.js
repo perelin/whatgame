@@ -151,9 +151,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `Quasar App`,
-        short_name: `Quasar App`,
-        description: `A Quasar Framework app`,
+        name: `What Game`,
+        short_name: `What Game`,
+        description: `Decide which game to play`,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",

@@ -1,6 +1,23 @@
 <template>
   <q-page>
     <div class="q-pa-md">
+      <q-banner rounded>
+        What Game Pass game to play tonight? A simple overview of all currently
+        available GamePass games with their score and release date. If you like
+        to give feedback or have good ideas how to improve this, feel free to
+        drop a note!
+        <template v-slot:action>
+          <q-btn
+            href="https://github.com/perelin/whatgame/discussions"
+            target="_blank"
+            label="Feedback and Requests"
+            color="primary"
+            class="text-black"
+          />
+        </template>
+      </q-banner>
+    </div>
+    <div class="q-pa-md">
       <q-table
         :dense="$q.screen.lt.md"
         title="Game Pass Games"
@@ -9,45 +26,81 @@
         row-key="id"
         :pagination="initialPagination"
         :filter="filter"
+        :visible-columns="visibleColumns"
       >
         <template #body-cell-igdbLink="props">
-          <q-td class="bg-blue-1" :props="props">
+          <q-td :props="props">
             <q-btn
               v-if="props.value != ''"
-              color="white"
               text-color="black"
               label="IGDB"
               :href="props.value"
               target="_blank"
+              color="primary"
+              class="text-black"
             />
           </q-td>
         </template>
 
         <template #body-cell-gpLink="props">
-          <q-td class="bg-blue-1" :props="props">
+          <q-td :props="props">
             <q-btn
               v-if="props.value != ''"
-              color="white"
               text-color="black"
               label="GamePass"
               :href="props.value"
               target="_blank"
+              color="primary"
+              class="text-black"
             />
           </q-td>
         </template>
 
         <template v-slot:top-right>
           <q-input
-            borderless
             dense
             debounce="300"
             v-model="filter"
             placeholder="Search"
+            outlined
           >
             <template v-slot:append>
               <q-icon name="search" />
             </template>
           </q-input>
+
+          <q-select
+            v-model="visibleColumns"
+            multiple
+            outlined
+            dense
+            options-dense
+            :display-value="$q.lang.table.columns"
+            emit-value
+            map-options
+            :options="gamesColumns"
+            option-value="name"
+            options-cover
+            style="min-width: 150px"
+            color="secondary"
+          >
+            <template
+              v-slot:option="{ itemProps, opt, selected, toggleOption }"
+            >
+              <q-item v-bind="itemProps">
+                <q-item-section>
+                  <q-item-label v-html="opt.label" />
+                </q-item-section>
+                <q-item-section side>
+                  <q-toggle
+                    :model-value="selected"
+                    color="secondary"
+                    @update:model-value="toggleOption(opt)"
+                  />
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
         </template>
       </q-table>
     </div>
@@ -169,7 +222,9 @@ export default defineComponent({
         });
     }
 
-    return { games, loadData, filter: ref("") };
+    var visibleColumns = ref(["name", "gpLink", "gpRating", "gpreleasedate"]);
+
+    return { games, loadData, filter: ref(""), visibleColumns };
   },
   watch: {
     games(newGames, oldGames) {
