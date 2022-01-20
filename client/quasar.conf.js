@@ -153,7 +153,8 @@ module.exports = configure(function (ctx) {
       manifest: {
         name: `What Game`,
         short_name: `What Game`,
-        description: `Decide which game to play`,
+        description: ` What Game Pass game to play tonight? A simple overview of all currently
+        available GamePass games with their score and release date.`,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",

@@ -1,7 +1,7 @@
 {
   "name": "whatgame",
   "version": "0.0.1",
-  "description": "Decide which game to play",
+  "description": " What Game Pass game to play tonight? A simple overview of all currently available GamePass games with their score and release date.",
   "productName": "What Game",
   "author": "Sebastian Patino-Lang <sebastian.patino-lang@poste.net>",
   "private": true,

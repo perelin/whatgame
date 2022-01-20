@@ -8,7 +8,7 @@
         drop a note!
         <template v-slot:action>
           <q-btn
-            href="https://github.com/perelin/whatgame/discussions"
+            href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAYBrVNdUQzNYNUVWMUFYTk4zUTVOSEkzQVdHQUU4Ri4u"
             target="_blank"
             label="Feedback and Requests"
             color="primary"
@@ -28,8 +28,9 @@
         :filter="filter"
         :visible-columns="visibleColumns"
       >
+        <!-- button to IGDB -->
         <template #body-cell-igdbLink="props">
-          <q-td :props="props">
+          <q-td :props="props" auto-width>
             <q-btn
               v-if="props.value != ''"
               text-color="black"
@@ -42,21 +43,24 @@
           </q-td>
         </template>
 
+        <!-- button to MSGP -->
         <template #body-cell-gpLink="props">
           <q-td :props="props">
             <q-btn
               v-if="props.value != ''"
               text-color="black"
-              label="GamePass"
               :href="props.value"
               target="_blank"
               color="primary"
               class="text-black"
+              icon="link"
             />
           </q-td>
         </template>
 
+        <!-- search and columns -->
         <template v-slot:top-right>
+          <!-- search -->
           <q-input
             dense
             debounce="300"
@@ -69,6 +73,7 @@
             </template>
           </q-input>
 
+          <!-- columns -->
           <q-select
             v-model="visibleColumns"
             multiple
@@ -81,7 +86,6 @@
             :options="gamesColumns"
             option-value="name"
             options-cover
-            style="min-width: 150px"
             color="secondary"
           >
             <template
@@ -114,29 +118,32 @@ import { useQuasar, date } from "quasar";
 
 const gamesColumns = [
   {
-    name: "name",
-    label: "Name",
-    field: "name",
-    sortable: true,
-    align: "left",
+    name: "gpLink",
+    label: "",
+    field: "gpid",
+    sortable: false,
+    format: (val, row) => {
+      return `https://www.xbox.com/en-us/games/store/gamename/${val}`;
+    },
   },
   {
-    name: "igdbfirstreleasedate",
-    label: "Original Release",
-    field: "igdbfirstreleasedatetimestamp",
+    name: "gpRating",
+    label: "Rating",
+    field: "gpaverageratingalltime",
     sortable: true,
     align: "left",
     format: (val, row) => {
       if (val === 0) {
         return "NA";
       }
-      const releaseDate = new Date(val * 1000);
-      return date.formatDate(releaseDate, "YYYY-MM");
+      // const floored = Math.floor(val);
+      // return `${floored}%`;
+      return val;
     },
   },
   {
     name: "gpreleasedate",
-    label: "Xbox Release",
+    label: "Year",
     field: "gpreleasedatetimestamp",
     sortable: true,
     align: "left",
@@ -147,6 +154,14 @@ const gamesColumns = [
       const releaseDate = new Date(val * 1000);
       return date.formatDate(releaseDate, "YYYY-MM");
     },
+  },
+  {
+    name: "name",
+    label: "Name",
+    field: "name",
+    sortable: true,
+    align: "left",
+    required: true,
   },
   {
     name: "rating",
@@ -162,35 +177,27 @@ const gamesColumns = [
       return `${floored}%`;
     },
   },
+
   {
-    name: "gpRating",
-    label: "Xbox Rating",
-    field: "gpaverageratingalltime",
+    name: "igdbfirstreleasedate",
+    label: "Original Release",
+    field: "igdbfirstreleasedatetimestamp",
     sortable: true,
     align: "left",
     format: (val, row) => {
       if (val === 0) {
         return "NA";
       }
-      // const floored = Math.floor(val);
-      // return `${floored}%`;
-      return val;
+      const releaseDate = new Date(val * 1000);
+      return date.formatDate(releaseDate, "YYYY-MM");
     },
   },
+
   {
     name: "igdbLink",
     label: "IGDB",
     field: "igdburl",
     sortable: false,
-  },
-  {
-    name: "gpLink",
-    label: "GamePass",
-    field: "gpid",
-    sortable: false,
-    format: (val, row) => {
-      return `https://www.xbox.com/en-us/games/store/gamename/${val}`;
-    },
   },
 ];
 const gamesRows = [];
@@ -215,14 +222,14 @@ export default defineComponent({
         .get(process.env.API_URL)
         .then((response) => {
           games.value = response.data;
-          console.log(games.value);
+          //console.log(games.value);
         })
         .catch((err) => {
           console.log(err);
         });
     }
 
-    var visibleColumns = ref(["name", "gpLink", "gpRating", "gpreleasedate"]);
+    var visibleColumns = ref(["gpLink", "name", "gpRating", "gpreleasedate"]);
 
     return { games, loadData, filter: ref(""), visibleColumns };
   },
