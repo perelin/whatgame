@@ -3,9 +3,11 @@
     <div class="q-pa-md">
       <q-banner rounded>
         What Game Pass game to play tonight? A simple overview of all currently
-        available GamePass games with their score and release date. If you like
-        to give feedback or have good ideas how to improve this, feel free to
-        drop a note!
+        available GamePass games with their score and release date.
+        Automatically update daily. The link takes you to the corresponding
+        GamePass detail page from where you can install the game remotly. If you
+        like to give feedback or have good ideas how to improve this, feel free
+        to drop me a note!
         <template v-slot:action>
           <q-btn
             href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAYBrVNdUQzNYNUVWMUFYTk4zUTVOSEkzQVdHQUU4Ri4u"

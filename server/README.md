@@ -1,5 +1,9 @@
 # README
 
+## GP
+
+https://www.xbox.com/en-us/xbox-game-pass/games
+
 ## Heroku
 
 deployment over github main branch (in heoku deploy console)
